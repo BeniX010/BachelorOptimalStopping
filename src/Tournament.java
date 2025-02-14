@@ -744,6 +744,12 @@ public class Tournament {
         globalCounter = participants.length;
     }
 
+    /**
+     * Setzt {@link Player#getOpponentIndex()} für jede Teilnehmer, dessen Spielzeit noch kleiner als das Turnierdauer ist, auf -1.
+     * <p>
+     * Diese Funktion wird von {@link #pairParticipantsNew(int, int)} bei der Ausnahmefall aufgerufen, wenn zum Beispiel nur noch zwei Spieler gibt, die davor schon gegeneinander gespielt haben,
+     * aber die Spielzeit von beide Spieler ist noch kleiner als das Turnierdauer.
+     */
     public void setOpponentIndexForEveryPlayer(){
         for(int i = 0; i < participants.length; i++){
             if(participants[i].getTimePlayed() < gameTime){
@@ -810,6 +816,11 @@ public class Tournament {
         return lowerBoundIndex;
     }
 
+    /**
+     * Setzt Spielzeit und die Anzahl der verlassenen Spiele von jedem Teilnehmer und {@link #globalCounter} zurück.
+     * <p>
+     *  Wenn mehrere Turniere demselben Turnierobjekt durchgeführt werden, müssen bevor die erneuten ausführung diese Werte zurückgesetzt werden
+     */
     public void resetTournament(){
         for(int i = 0; i < participants.length; i++){
             participants[i].setTimePlayed(0);
@@ -822,6 +833,9 @@ public class Tournament {
         //list = new ArrayList<>();
     }
 
+    /**
+     * Zurücksetzung der Punkte und die Anzahl der Spieler von jedem Turnierteilnehmer.
+     */
     public void resetPlayerAttributes(){
         for(int i = 0; i < participants.length; i++){
             participants[i].setPoints(0);
