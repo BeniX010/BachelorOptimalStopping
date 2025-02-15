@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8851b235-7b2e-481f-a4fc-9feea3577949" name="Changes" comment="Optimal Stopping version 1 with java doc">
-      <change beforePath="$PROJECT_DIR$/src/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament.java" afterDir="false" />
+    <list default="true" id="8851b235-7b2e-481f-a4fc-9feea3577949" name="Changes" comment="Documentation an die Funktionen setOpponentIndexForEveryPlayer, setPlayerGamesLeft, resetTournament und resetPlayerAttributes geschrieben">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +60,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739550701001</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Documentation an die Funktionen setOpponentIndexForEveryPlayer, setPlayerGamesLeft, resetTournament und resetPlayerAttributes geschrieben">
+      <option name="closed" value="true" />
+      <created>1739551366238</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739551366238</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -75,6 +84,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Optimal Stopping version 1 with java doc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimal Stopping version 1 with java doc" />
+    <MESSAGE value="Documentation an die Funktionen setOpponentIndexForEveryPlayer, setPlayerGamesLeft, resetTournament und resetPlayerAttributes geschrieben" />
+    <option name="LAST_COMMIT_MESSAGE" value="Documentation an die Funktionen setOpponentIndexForEveryPlayer, setPlayerGamesLeft, resetTournament und resetPlayerAttributes geschrieben" />
   </component>
 </project>

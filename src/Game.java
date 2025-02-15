@@ -2,7 +2,7 @@ import java.util.Random;
 
 /**
  * Diese Klasse repräsentiert eine Runde von einem Turnier zwischen zwei Spieler.
- * @see Tournament#pairParticipants()
+ * @see Tournament#pairParticipantsNew(int, int)
  */
 public class Game {
     /**
