@@ -92,6 +92,9 @@ public class Game {
     * die Gewinnwahrscheinlichkeit + die Wahrscheinlichkeit für Unentschieden, dann hat <code>player1</code> verloren. Der Spieler der gewinnt bekommt 2 Punkte und der Verlierer 0. Beim Unentschieden bekommen beide Spieler 1 Punkt.
     * </p>
     * Wenn das Spiel nicht verlassen wird, von einem der Spieler, dann wird bei beiden Spieler {@link Player#getGamesPlayed()} um 1 erhöht und {@link Player#getIsInGame()} auf falsch gesetzt.
+     * <p>
+     * Es wird außerdem noch die Ratings der beiden Spieler angepasst, die abhängig von dem Rating der beiden Spieler abhängt und der Ausgang des Spieles zwischen die zwei Spieler.
+     * Wenn eine der Spieler das Spiel verlässt, gilt das als ein verlorenes Spiel für den Spieler und ein gewonnenes Spiel für seine Gegner.
     * @param participants  Teilnehmer Array des Turniers, die aus Player Objekten besteht
     * @param gameTime  dauer des Turniers in Sekunden
     * @param multiplier    eine zahl die mit 25 multipliziert wird und somit die Grenze für die Spieler berechnet
@@ -107,6 +110,7 @@ public class Game {
     * @see #playerLeftGame(Player, Player)
     * @see #calculateWinProbability(int)
     * @see #calculateDrawProbability(int)
+     * @see #adjustRating(Player, double, int)
     * @see Math#round(double)
     */
     public void playGame(Player[] participants, int gameTime, int multiplier, int index ,int playerIndex){
@@ -254,6 +258,18 @@ public class Game {
         return 2*Math.sqrt(calculateWinProbability(ratingDifference)*calculateWinProbability(-ratingDifference));
     }
 
+    /**
+     * Passt die {@link Player#getRating()} der über gegebenen Spieler abhängig dem Ergebnis des aktuellen Spiels gegen seinen Gegner und die Ratings von den beiden Spieler.
+     * <p>
+     * Wird in {@link #playGame(Player[], int, int, int, int)} aufgerufen.
+     * Um die Bewertungen der Spieler anzupassen wird die Formel von ELO verwendet.
+     * Diese ruft als hilfe {@link #helpMethodForAdjustRating(int)} auf.
+     * Siehe <a href="https://en.wikipedia.org/wiki/Elo_rating_system#Formal_derivation_for_win/draw/loss_games">Formal derivation for win/draw/loss games</a>.
+     * und Siehe <a https://en.wikipedia.org/wiki/Elo_rating_system#Most_accurate_K-factor">Most accurate K-factor</a>.
+     * @param player Spieler dessen Rating angepasst werden soll
+     * @param s Faktor die abhängig von dem Ergebnis dem aktuellsten Spiel ist, die der über gegebene Spieler gespielt hat. Es ist 1, wenn der Spieler gewonnen hat, 0.5 bei Unentschieden und 0, wenn der Spieler verloren hat.
+     * @param ratingDifference Bewertungsunterschied zwischen der über gegebenen Spieler und sein Gegner
+     */
     public void adjustRating(Player player, double s, int ratingDifference){
         int k = 32;
         int playerRating = player.getRating();
@@ -274,6 +290,11 @@ public class Game {
         player.setRating(newRating);
     }
 
+    /**
+     * Hilfsmethode für {@link #adjustRating(Player, double, int)} um ein Teil der formel zu berechnen.
+     * @param ratingDifference  Bewertungsunterschied zwischen der über gegebenen Spieler und sein Gegner
+     * @return gibt das Ergebnis der Formel zurück
+     */
     private double helpMethodForAdjustRating(int ratingDifference){
         return (Math.pow(10,(ratingDifference/400.0)) + 2/2)/(Math.pow(10,(-ratingDifference/400.0))+2+Math.pow(10,(ratingDifference/400.0)));
     }
