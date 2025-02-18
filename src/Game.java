@@ -117,16 +117,31 @@ public class Game {
         int roundTime;
         Player player1;
         Player player2;
+        double s1 = 0.0;
+        double s2 = 0.0;
+        int ratingDifference;
+        //int realMultiplier1 = multiplier;
+        //int realMultiplier2 = multiplier;
 
         player1 = participants[index];
         player2 = participants[player1.getOpponentIndex()];
-        //System.out.println("Player: " + player1.getIndex() + " Opponent: " + player1.getOpponentIndex());
-
+        ratingDifference = player1.getRating()-player2.getRating();
+        /*System.out.println("Player: " + player1.getIndex() + " Opponent: " + player1.getOpponentIndex());
+        System.out.println("Player1 Old Rating: " + player1.getRating());
+        System.out.println("Player2 Old Rating: " + player2.getRating());*/
+        /*if(player1.getIndex() != playerIndex){
+            realMultiplier1 = player1.multiplier;
+        }
+        if(player2.getIndex() != playerIndex){
+            realMultiplier2 = player2.multiplier;
+        }*/
         if(player1.getIndex() == playerIndex && player1.getRating()+multiplier*25 < player2.getRating()){
             playerLeftGame(player1,player2);
+            s2 = 1.0;
         }
         else if(player2.getIndex() == playerIndex && player2.getRating()+multiplier*25 < player1.getRating()){
             playerLeftGame(player2,player1);
+            s1 = 1.0;
         }
         else{
             roundTime = (int)Math.round(random.nextGaussian(roundTimeMean,roundTimeSd));
@@ -143,28 +158,36 @@ public class Game {
             }
 
             randomValue = random.nextDouble();
-            winProbability = calculateWinProbability(player1.getRating()-player2.getRating());
-            drawProbability = calculateDrawProbability(player1.getRating()-player2.getRating());
+            winProbability = calculateWinProbability(ratingDifference);
+            drawProbability = calculateDrawProbability(ratingDifference);
                /* System.out.println("RANDOM_ " +randomValue);
                 System.out.println("WINPROBABILITY: " + winProbability);
                 System.out.println("DRAWPROBABILITY: " + drawProbability);*/
             if(randomValue <= winProbability){
                 player1.addPoints(2);
+                s1 = 1.0;
                 //System.out.println(player1.getId() + " won!");
                 // System.out.println("Won!");
             }
             else if(randomValue <= winProbability+drawProbability){
                 player1.addPoints(1);
                 player2.addPoints(1);
+                s1 = 0.5;
+                s2 = 0.5;
                 //System.out.println(player1.getId() + " Draw!");
             }
             else{
                 player2.addPoints(2);
+                s2 = 1.0;
                 //System.out.println(player1.getId() + " lost!");
             }
             player1.addGamesPlayed(1);
             player2.addGamesPlayed(1);
         }
+        adjustRating(player1,s1,ratingDifference);
+        adjustRating(player2,s2,-ratingDifference);
+        //System.out.println("Player1 new Rating: " + player1.getRating());
+        //System.out.println("Player2 new Rating: " + player2.getRating());
     }
 
     /**
@@ -229,6 +252,30 @@ public class Game {
      */
     private double calculateDrawProbability(int ratingDifference){
         return 2*Math.sqrt(calculateWinProbability(ratingDifference)*calculateWinProbability(-ratingDifference));
+    }
+
+    public void adjustRating(Player player, double s, int ratingDifference){
+        int k = 32;
+        int playerRating = player.getRating();
+        if(playerRating >= 2100 && playerRating <= 2400){
+            k = 24;
+        }
+        else if(playerRating > 2400){
+            k = 16;
+        }
+        //System.out.println("k: " + k + " s: " + s + " ratingDiff: " + ratingDifference);
+        double result = (playerRating + k * (s - helpMethodForAdjustRating(ratingDifference)));
+        int newRating;
+        if(result-(int)result < 0.5){
+            newRating = (int) result;
+        }else{
+            newRating = (int) result + 1;
+        }
+        player.setRating(newRating);
+    }
+
+    private double helpMethodForAdjustRating(int ratingDifference){
+        return (Math.pow(10,(ratingDifference/400.0)) + 2/2)/(Math.pow(10,(-ratingDifference/400.0))+2+Math.pow(10,(ratingDifference/400.0)));
     }
 
     //Getters und Setters
