@@ -36,7 +36,7 @@ public class Tournament {
      * <p>
      * Wird verwendet, um nachzuprüfen, ob irgendein Spieler diese Zeit schon überschritten hat.
      * @see #pairParticipantsNew(int, int)
-     * @see #multipleTimePairingNew(int, int, Player)
+     * @see #multipleTimePairingNew(Player)
      * @see Game#playGame(Player[], int, int, int, int)
      */
     private int gameTime;
@@ -49,7 +49,7 @@ public class Tournament {
      * Alle Spieler werden auch durch diesen Array verwaltet.
      * @see #pairParticipantsNew(int, int)
      * @see #pairParticipantsFirstTime()
-     * @see #multipleTimePairingNew(int, int, Player)
+     * @see #multipleTimePairingNew(Player)
      * @see #sortInCustomListOne(Player, CustomList)
      * @see #sortInCustomListOneOpponent(Player)
      * @see #resetTournament()
@@ -91,6 +91,7 @@ public class Tournament {
      * @see #startTournamentGameVersion3(int, int)
      */
     private int globalCounter;
+    private int counter;
 
     /**
      * Konstruktor die eine <code>Tournament</code> instanz erzeugt.
@@ -420,7 +421,7 @@ public class Tournament {
      * @see Player#getIsInGame()
      * @see #getUpperIndex(int[], Player)
      * @see #getLowerIndex(int[], Player)
-     * @see #multipleTimePairingNew(int, int, Player)
+     * @see #multipleTimePairingNew(Player)
      * @see #sortInCustomListOne(Player, CustomList)
      * @see #sortInCustomListOneOpponent(Player) (Player, CustomList)
      */
@@ -432,6 +433,7 @@ public class Tournament {
         if(indexIdentifier.getData().getTimePlayed() >= gameTime){
             setOpponentIndexForEveryPlayer();
             indexIdentifier = startList.getPointer();
+            counter = 0;
         }
         //index = participantsSortedWithTime[0].getIndex();
         index = indexIdentifier.getData().getIndex();
@@ -459,6 +461,16 @@ public class Tournament {
             else if(player.getTimePlayed() >= gameTime){
                 sortInCustomListOne(player,indexIdentifier);
             }
+            else if(counter == (participants.length - globalCounter)){
+                //System.out.println(counter);
+                //System.out.println(globalCounter);
+                CustomList tmp = startList.getPointer();
+                while(tmp.getData().getTimePlayed() < gameTime){
+                    tmp.getData().setTimePlayed(gameTime);
+                    tmp = tmp.getPointer();
+                }
+                globalCounter = participants.length;
+            }
             else{
                 indexIdentifier = indexIdentifier.getPointer();
 
@@ -485,6 +497,8 @@ public class Tournament {
 
         indexIdentifier = startList.getPointer();
         //startList.printList();
+       // System.out.println();
+        //printParticipants();
 
     }
 
@@ -609,8 +623,6 @@ public class Tournament {
      * In diesen Fall wird einen counter erhöht und am Ende dieser Funktion wird geprüft ob der counter > 0 ist. In den vorher genannten Fall ist größer 0 und
      * der zweitniedrigste spieler sucht sich einen Gegner. Im zweiten Ausnahmefall findet der Spieler wieder kein Gegner, aber in diesen Fall könnte der Spieler auch gegen
      * keine Spieler mehr spielen. Deswegen wird der spielzeit der Spieler auf {@link #gameTime} gesetzt.
-     * @param lowerBoundIndex   untere Grenze der Gegner suchende Spieler
-     * @param upperBoundIndex   obere Grenze der Gegner suchende Spieler
      * @param player    Gegner suchende Spieler
      * @see Random#nextInt()
      * @see #startList
@@ -648,20 +660,20 @@ public class Tournament {
             /*if(normalIndex == player.getIndex()){
 
             }*/
-            if((normalIndex == player.getOpponentIndex() || participants[normalIndex].getOpponentIndex() == player.getIndex()) && globalCounter < participants.length-2){
+            if(participants[normalIndex].getTimePlayed() >= gameTime){
+                break;
+            }
+            else if(participants[normalIndex].getRating() > player.getRating()+400 || participants[normalIndex].getRating() < player.getRating()-400){
+                //System.out.println("Zu groß oder Klein: " + normalIndex);
+            }
+            else if((normalIndex == player.getOpponentIndex() || participants[normalIndex].getOpponentIndex() == player.getIndex()) && globalCounter < participants.length-2){
                // System.out.println(normalIndex);
                 playableOpponents++;
-            }
-            else if(participants[normalIndex].getTimePlayed() >= gameTime){
-                break;
             }
             /*else if(participants[normalIndex].getIsInGame()){
 
                 //System.out.println(normalIndex);
             }*/
-            else if(participants[normalIndex].getRating() > player.getRating()+400 || participants[normalIndex].getRating() < player.getRating()-400){
-
-            }
             /*else if(j == player.getIndex()){
                 continue;
             }*/
@@ -705,8 +717,18 @@ public class Tournament {
         //System.out.println(sameTimeDiffList);
         if(opponentIndex == -1){
             if(playableOpponents == 0){
-                player.setTimePlayed(gameTime);
-                globalCounter++;
+                //System.out.println("GLOBALCOUNTER: " + globalCounter);
+                if(globalCounter == participants.length-2){
+                   // System.out.println("ENDE!");
+                    player.setTimePlayed(gameTime);
+                    indexIdentifier.getPointer().getData().setTimePlayed(gameTime);
+                    globalCounter = participants.length;
+                }
+                else{
+                    //player.setTimePlayed(gameTime);
+                    //globalCounter++;
+                    counter++;
+                }
             }
             player.setIsInGame(false);
             return;
@@ -723,12 +745,14 @@ public class Tournament {
         }else{
             participants[opponentIndex].addTimePlayed(player.getTimePlayed() - participants[opponentIndex].getTimePlayed());
         }
-       /* System.out.println("Time from Player After: " + player.getTimePlayed());
+        /*System.out.println("Time from Player After: " + player.getTimePlayed());
         System.out.println("Time from Opponent After: " + participants[opponentIndex].getTimePlayed());
         System.out.println("OPPONENTINDEX: " + opponentIndex);*/
         participants[opponentIndex].setIsInGame(true);
         player.setOpponentIndex(opponentIndex);
         participants[opponentIndex].setOpponentIndex(player.getIndex());
+        //System.out.println("counter: " + counter);
+        counter = 0;
 
     }
 
@@ -856,6 +880,10 @@ public class Tournament {
     }
     public int getGameTime(){
         return this.gameTime;
+    }
+
+    public void setGlobalCounter(int globalCounter){
+        this.globalCounter = globalCounter;
     }
 
   /*  public void pairParticipants(/*int[][] participantsPairing*///) {

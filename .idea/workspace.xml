@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8851b235-7b2e-481f-a4fc-9feea3577949" name="Changes" comment="Documentation an die Funktionen setOpponentIndexForEveryPlayer, setPlayerGamesLeft, resetTournament und resetPlayerAttributes geschrieben">
+    <list default="true" id="8851b235-7b2e-481f-a4fc-9feea3577949" name="Changes" comment="getLowerIndex und getUpperIndex in pairParticipantsNew entfernt und multipleTimePairingNew modifiziert, dass upper und lowerindex nicht verwendet wird">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +24,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -36,7 +44,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "changingRatings",
     "last_opened_file_path": "C:/Users/User/Desktop/Hochschule/Bachelor-OptimalStopping/commons-math3-3.6.1",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
@@ -68,7 +76,23 @@
       <option name="project" value="LOCAL" />
       <updated>1739551366238</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="die Funktionsname auf pairParticipantsNew bei der dokumentation verändert">
+      <option name="closed" value="true" />
+      <created>1739614573671</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739614573671</updated>
+    </task>
+    <task id="LOCAL-00004" summary="getLowerIndex und getUpperIndex in pairParticipantsNew entfernt und multipleTimePairingNew modifiziert, dass upper und lowerindex nicht verwendet wird">
+      <option name="closed" value="true" />
+      <created>1739626765063</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739626765063</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -85,6 +109,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Optimal Stopping version 1 with java doc" />
     <MESSAGE value="Documentation an die Funktionen setOpponentIndexForEveryPlayer, setPlayerGamesLeft, resetTournament und resetPlayerAttributes geschrieben" />
-    <option name="LAST_COMMIT_MESSAGE" value="Documentation an die Funktionen setOpponentIndexForEveryPlayer, setPlayerGamesLeft, resetTournament und resetPlayerAttributes geschrieben" />
+    <MESSAGE value="die Funktionsname auf pairParticipantsNew bei der dokumentation verändert" />
+    <MESSAGE value="getLowerIndex und getUpperIndex in pairParticipantsNew entfernt und multipleTimePairingNew modifiziert, dass upper und lowerindex nicht verwendet wird" />
+    <option name="LAST_COMMIT_MESSAGE" value="getLowerIndex und getUpperIndex in pairParticipantsNew entfernt und multipleTimePairingNew modifiziert, dass upper und lowerindex nicht verwendet wird" />
   </component>
 </project>

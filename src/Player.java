@@ -80,9 +80,13 @@ public class Player {
      * @see Game#startGameNewVersionWithLeavingNew(Player[], int, int, int, int)
      * @see Tournament#pairParticipantsFirstTime()
      * @see Tournament#pairParticipantsNew(int, int)
-     * @see Tournament#multipleTimePairingNew(int, int, Player)
+     * @see Tournament#multipleTimePairingNew(Player)
      */
     private int opponentIndex;
+    /*public int multiplier;
+    public void setMultiplier(int multiplier){
+        this.multiplier = multiplier;
+    }*/
 
     /**
      * Konstruktor um einen Spieler zu erstellen mit einer eindeutigen ID und sein Rating.
@@ -110,6 +114,7 @@ public class Player {
         this.index = 0;
         this.isInGame = false;
         this.opponentIndex = -1;
+        //this.multiplier = 0;
     }
 
     /**
