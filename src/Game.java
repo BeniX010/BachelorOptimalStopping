@@ -39,7 +39,7 @@ public class Game {
      * @param playerIndex   index der Spieler der als einzige die Spiele verlässt
      * @see Tournament#pairParticipantsNew(int, int)
      */
-    public void startGameNewVersionWithLeavingNew(Player[] participants, int gameTime, int multiplier, int index, int playerIndex) {
+    public void startGame(Player[] participants, int gameTime, int multiplier, int index, int playerIndex) {
         playGame(participants,gameTime,multiplier,index,playerIndex);
     }
     /**
@@ -71,7 +71,7 @@ public class Game {
     /**
     * Simuliert ein Spiel zwischen zwei Spieler.
     * <p>
-    * Diese Methode wird von {@link #startGameNewVersionWithLeavingNew(Player[], int, int, int, int)} und {@link #startGameFirstTime(Player[], int, int, int)} aufgerufen.
+    * Diese Methode wird von {@link #startGame(Player[], int, int, int, int)} und {@link #startGameFirstTime(Player[], int, int, int)} aufgerufen.
     * Um das Spiel zwischen die zwei Spieler zu simulieren wird das {@link Tournament#getParticipants()} und das {@link Player#getIndex()} übergeben um zu wissen,
     * welche zwei Spieler gegeneinander Spielen.
     * Dessen Spielerindex übergeben wurde, ist <code>player1</code> und sein Gegner ist <code>player2</code>.

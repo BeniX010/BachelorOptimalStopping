@@ -176,7 +176,7 @@ public class Tournament {
      * @see #pairParticipantsNew(int, int)
      * @see #initializeCustomList()
      * @see Game#startGameFirstTime(Player[], int, int, int)
-     * @see Game#startGameNewVersionWithLeavingNew(Player[], int, int, int, int)
+     * @see Game#startGame(Player[], int, int, int, int)
      */
     public void startTournamentGameVersion3(int multiplier,int playerIndex){
         boolean isTournamentEnd = false;
@@ -468,7 +468,7 @@ public class Tournament {
             }
             return;
         }else{
-            game.startGameNewVersionWithLeavingNew(participants,gameTime,multiplier,index,playerIndex);
+            game.startGame(participants,gameTime,multiplier,index,playerIndex);
             if(player.getTimePlayed() >= gameTime){
                 globalCounter++;
             }
