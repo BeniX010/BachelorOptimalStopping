@@ -175,7 +175,7 @@ public class Tournament {
      * @see #pairParticipantsFirstTime()
      * @see #pairParticipantsNew(int, int)
      * @see #initializeCustomList()
-     * @see Game#startGameNewVersionWithLeaving(Player[], int, int, int)
+     * @see Game#startGameFirstTime(Player[], int, int, int)
      * @see Game#startGameNewVersionWithLeavingNew(Player[], int, int, int, int)
      */
     public void startTournamentGameVersion3(int multiplier,int playerIndex){
@@ -185,7 +185,7 @@ public class Tournament {
             System.out.print("first: " + participants[i].getIndex() + " IsInGame: " + participants[i].getIsInGame());
             System.out.println(" second: " + participants[i].getOpponentIndex() + " IsInGame: " + participants[i].getIsInGame());
         }*/
-        game.startGameNewVersionWithLeaving(participants,gameTime,multiplier,playerIndex);
+        game.startGameFirstTime(participants,gameTime,multiplier,playerIndex);
         Arrays.sort(participantsSortedWithTime, Comparator.comparingInt(Player::getTimePlayed));
         initializeCustomList();
         //startList.printList();
@@ -203,7 +203,7 @@ public class Tournament {
      * Wird innerhalb von {@link #startTournamentGameVersion3(int, int)} aufgerufen, nachdem die Paare, die am Anfang gebildet wurde, alle gespielt haben.
      * {@link #indexIdentifier} wird auch initialisiert, und zwar mit dem ersten Element der Liste.
      * @see #pairParticipantsFirstTime()
-     * @see Game#startGameNewVersionWithLeaving(Player[], int, int, int)
+     * @see Game#startGameFirstTime(Player[], int, int, int)
      */
     public void initializeCustomList(){
         CustomList tmp = startList;
