@@ -14,7 +14,7 @@ public class Player {
      * Ist die Bewertung einen Spieler.
      * Es ist eine wert die, die Stärke von dem Spieler angibt.
      * Dieser Wert hilft bei der Gegnersuche einen passenden Gegner mit ähnlichen bewertung zu finden.
-     * @see Tournament#pairParticipantsNew(int, int)
+     * @see Tournament#pairParticipants(int, int)
      */
     private int rating;
     /**
@@ -52,7 +52,7 @@ public class Player {
     /**
      * Gibt an, an welche Stelle diese Spieler sich bei dem Teilnehmerarray im Turnier, die nach dem Rating sortiert ist, befindet.
      * Diese ist eine hilfsvariable die bei der Gegnersuche des Spielers hilft.
-     * @see Tournament#pairParticipantsNew(int, int)
+     * @see Tournament#pairParticipants(int, int)
      */
     private int index;
 
@@ -62,7 +62,7 @@ public class Player {
      * Wenn die teilnehmeranzahl ungerade ist kann der Spieler erkannt werden, die keinen gegner hat.
      * Außerdem ist es auch hilfreich zu erkennen, ob ein Spieler noch überhaupt gegen einen gegner spielen kann.
      * @see Tournament#pairParticipantsFirstTime()
-     * @see Tournament#pairParticipantsNew(int, int)
+     * @see Tournament#pairParticipants(int, int)
      * @see Game#startGameFirstTime(Player[], int, int, int)
      * @see Game#startGame(Player[], int, int, int, int)
      */
@@ -79,8 +79,8 @@ public class Player {
      * @see Game#startGameFirstTime(Player[], int, int, int)
      * @see Game#startGame(Player[], int, int, int, int)
      * @see Tournament#pairParticipantsFirstTime()
-     * @see Tournament#pairParticipantsNew(int, int)
-     * @see Tournament#multipleTimePairingNew(int, int, Player)
+     * @see Tournament#pairParticipants(int, int)
+     * @see Tournament#pairTwoPlayers(int, int, Player)
      */
     private int opponentIndex;
 

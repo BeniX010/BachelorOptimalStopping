@@ -4,7 +4,7 @@
  * Diese Verkette Liste wird für die <code>Tournament</code> Klasse als hilfe benutzt, speziell für die effiziente einsortieren von Spieler nach
  * ihrer gespielten Zeit.
  * </p>
- * @see Tournament#pairParticipantsNew(int, int) ()
+ * @see Tournament#pairParticipants(int, int) ()
  */
 public class CustomList {
     /**

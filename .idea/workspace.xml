@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8851b235-7b2e-481f-a4fc-9feea3577949" name="Changes" comment="Documentation an die Funktionen setOpponentIndexForEveryPlayer, setPlayerGamesLeft, resetTournament und resetPlayerAttributes geschrieben">
+    <list default="true" id="8851b235-7b2e-481f-a4fc-9feea3577949" name="Changes" comment="changed Method name in Game class from startGameNewVersionWithLeavingNew to startGame">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CustomList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +72,23 @@
       <option name="project" value="LOCAL" />
       <updated>1739551366238</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="changed Method name in Game class from startGameNewVersionWithLeaving to startGameFirstTime">
+      <option name="closed" value="true" />
+      <created>1740423546001</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1740423546001</updated>
+    </task>
+    <task id="LOCAL-00004" summary="changed Method name in Game class from startGameNewVersionWithLeavingNew to startGame">
+      <option name="closed" value="true" />
+      <created>1740425245075</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1740425245075</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -84,6 +105,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Optimal Stopping version 1 with java doc" />
     <MESSAGE value="Documentation an die Funktionen setOpponentIndexForEveryPlayer, setPlayerGamesLeft, resetTournament und resetPlayerAttributes geschrieben" />
-    <option name="LAST_COMMIT_MESSAGE" value="Documentation an die Funktionen setOpponentIndexForEveryPlayer, setPlayerGamesLeft, resetTournament und resetPlayerAttributes geschrieben" />
+    <MESSAGE value="changed Method name in Game class from startGameNewVersionWithLeaving to startGameFirstTime" />
+    <MESSAGE value="changed Method name in Game class from startGameNewVersionWithLeavingNew to startGame" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed Method name in Game class from startGameNewVersionWithLeavingNew to startGame" />
   </component>
 </project>

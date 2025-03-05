@@ -1,9 +1,5 @@
-import org.apache.commons.math3.distribution.NormalDistribution;
-
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Hashtable;
-import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -28,7 +24,7 @@ public class Main {
         long startTime = System.currentTimeMillis();
         long endTime;
         tournament.printParticipants();
-        tournament.startTournamentGameVersion3(1,0);
+        tournament.startTournament(1,0);
         /*for(int i = 0; i < tournaments.length; i++){
             tournaments[i] = new Tournament(3600,participantsSize,300,60);
         }

@@ -2,7 +2,7 @@ import java.util.Random;
 
 /**
  * Diese Klasse repräsentiert eine Runde von einem Turnier zwischen zwei Spieler.
- * @see Tournament#pairParticipantsNew(int, int)
+ * @see Tournament#pairParticipants(int, int)
  */
 public class Game {
     /**
@@ -37,7 +37,7 @@ public class Game {
      * @param multiplier    eine zahl die mit 25 multipliziert wird und somit die Grenze für die Spieler berechnet
      * @param index     index der spielende Spieler
      * @param playerIndex   index der Spieler der als einzige die Spiele verlässt
-     * @see Tournament#pairParticipantsNew(int, int)
+     * @see Tournament#pairParticipants(int, int)
      */
     public void startGame(Player[] participants, int gameTime, int multiplier, int index, int playerIndex) {
         playGame(participants,gameTime,multiplier,index,playerIndex);
