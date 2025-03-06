@@ -25,8 +25,8 @@ public class Player {
      * Gibt an, wie viele Spiele der Spieler verlassen hat.
      * Dies wird während der Turniere aktualisiert und wird dadurch eine entsprechende
      * Strafe and dem Spieler hinzugefügt, wenn diese mehr als eine bestimmte Anzahl an Spiele Verlassen hat.
-     * @see Game#startGameNewVersionWithLeavingNew(Player[], int, int, int, int)
-     * @see Game#startGameNewVersionWithLeaving(Player[], int, int, int)
+     * @see Game#startGame(Player[], int, int, int, int)
+     * @see Game#startGameFirstTime(Player[], int, int, int)
      */
     private int gamesLeft;
 
@@ -36,16 +36,16 @@ public class Player {
      * Wenn das Spiel von der Spieler verlassen wird, wird die Strafzeit zu diese Attribut zugewiesen abhängig von der Anzahl der verlassenen
      * Spiele, die der Spieler abwarten muss, bevor wieder einen Gegner suchen kann.
      * @see #gamesLeft
-     * @see Game#startGameNewVersionWithLeaving(Player[], int, int, int)
-     * @see Game#startGameNewVersionWithLeavingNew(Player[], int, int, int, int)
+     * @see Game#startGameFirstTime(Player[], int, int, int)
+     * @see Game#startGame(Player[], int, int, int, int)
      */
     private int timePlayed;
 
     /**
      * Anzahl der Spiele.
      * Wird erhöht, wenn der Spieler ein Gegner hat unabhängig davon, ob er dem Spiel verlässt oder durchspielt.
-     * @see Game#startGameNewVersionWithLeaving(Player[], int, int, int)
-     * @see Game#startGameNewVersionWithLeavingNew(Player[], int, int, int, int)
+     * @see Game#startGameFirstTime(Player[], int, int, int)
+     * @see Game#startGame(Player[], int, int, int, int)
      */
     private int gamesPlayed;
 
@@ -63,8 +63,8 @@ public class Player {
      * Außerdem ist es auch hilfreich zu erkennen, ob ein Spieler noch überhaupt gegen einen gegner spielen kann.
      * @see Tournament#pairParticipantsFirstTime()
      * @see Tournament#pairParticipantsNew(int, int)
-     * @see Game#startGameNewVersionWithLeaving(Player[], int, int, int)
-     * @see Game#startGameNewVersionWithLeavingNew(Player[], int, int, int, int)
+     * @see Game#startGameFirstTime(Player[], int, int, int)
+     * @see Game#startGame(Player[], int, int, int, int)
      */
     private boolean isInGame;
 
@@ -76,8 +76,8 @@ public class Player {
      * Es wird vermieden die gleichen Gegner zu bekommen.
      * Ausnahme nur, wenn es keine andere möglichkeit mehr gibt.
      * </p>
-     * @see Game#startGameNewVersionWithLeaving(Player[], int, int, int)
-     * @see Game#startGameNewVersionWithLeavingNew(Player[], int, int, int, int)
+     * @see Game#startGameFirstTime(Player[], int, int, int)
+     * @see Game#startGame(Player[], int, int, int, int)
      * @see Tournament#pairParticipantsFirstTime()
      * @see Tournament#pairParticipantsNew(int, int)
      * @see Tournament#multipleTimePairingNew(Player)
