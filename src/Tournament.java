@@ -4,7 +4,7 @@ import java.util.*;
  * Repräsentiert ein Turnier mit einer bestimmten Anzahl von Teilnehmer, eine bestimmte Turnierdauer, und weitere Hilfsvariable um ein Turnier simulieren zu können.
  * <p>
  * Um ein Turnier simulieren zu können, muss nach dem ein Objekt von diese Klasse erstellt worden ist, die {@link #fillAndSortParticipantNormalDistribution(double, double, Player)}
- * zuerst ausgeführt werden. Danach kann {@link #startTournamentGameVersion3(int, int)} aufgerufen werden um das gesamte Turnier simulieren zu können.
+ * zuerst ausgeführt werden. Danach kann {@link #startTournament(int, int)} aufgerufen werden um das gesamte Turnier simulieren zu können.
  */
 public class Tournament {
 
@@ -12,14 +12,14 @@ public class Tournament {
      * Anfang der verketteten Liste, die einen Zeiger auf die Erste element hat, aber keine daten hat.
      * <p>
      * Hilfsobjekt um effizient Spieler nach ihrer Spielzeit in eine Liste einsortieren zu können
-     * @see #pairParticipantsNew(int, int)
+     * @see #pairParticipants(int, int)
      */
     private CustomList startList;
     /**
      * Ende der verketteten Liste, die einen Zeiger auf das Letzte element hat, aber keine daten hat.
      * <p>
      * Hilfsobjekt um effizient Spieler nach ihrer Spielzeit in eine Liste einsortieren zu können
-     * @see #pairParticipantsNew(int, int)
+     * @see #pairParticipants(int, int)
      */
     private CustomList endList;
 
@@ -27,7 +27,7 @@ public class Tournament {
      * Enthält das aktuelle Listenelement.
      * <p>
      * Hilfsvariable für die Gegnersuche.
-     * @see #pairParticipantsNew(int, int)
+     * @see #pairParticipants(int, int)
      */
     private CustomList indexIdentifier;
 
@@ -35,8 +35,8 @@ public class Tournament {
      * Turnierdauer in Sekunden.
      * <p>
      * Wird verwendet, um nachzuprüfen, ob irgendein Spieler diese Zeit schon überschritten hat.
-     * @see #pairParticipantsNew(int, int)
-     * @see #multipleTimePairingNew(Player)
+     * @see #pairParticipants(int, int)
+     * @see #pairTwoPlayers(Player)
      * @see Game#playGame(Player[], int, int, int, int)
      */
     private int gameTime;
@@ -47,9 +47,9 @@ public class Tournament {
      * Wird nach die Bewertung des Spielers sortiert.
      * Wird verwendet für die Gegnersuche und Spielsimulation.
      * Alle Spieler werden auch durch diesen Array verwaltet.
-     * @see #pairParticipantsNew(int, int)
+     * @see #pairParticipants(int, int)
      * @see #pairParticipantsFirstTime()
-     * @see #multipleTimePairingNew(Player)
+     * @see #pairTwoPlayers(Player)
      * @see #sortInCustomListOne(Player, CustomList)
      * @see #sortInCustomListOneOpponent(Player)
      * @see #resetTournament()
@@ -70,7 +70,7 @@ public class Tournament {
      * Repräsentiert ein Spiel.
      * <p>
      * Wird benutzt nach die Gegnersuche ein Spieler, um ein Spiel zwischen zwei Spieler auszuführen können.
-     * @see #startTournamentGameVersion3(int, int)
+     * @see #startTournament(int, int)
      */
     public Game game;
 
@@ -88,7 +88,7 @@ public class Tournament {
      * <p>
      * Dient als hilfsvariable um zu überprüfen, ob jede Spieler schon mindestens so viel Spielzeit hat
      * wie der Turnierdauer und somit das Turnier beendet werden kann.
-     * @see #startTournamentGameVersion3(int, int)
+     * @see #startTournament(int, int)
      */
     private int globalCounter;
     private int counter;
@@ -174,12 +174,12 @@ public class Tournament {
      * @param multiplier eine zahl die mit 25 multipliziert wird und somit die Grenze für das Verlassen der Spiele für die Spieler berechnet
      * @param playerIndex   index der Spieler der als einzige die Spiele verlässt
      * @see #pairParticipantsFirstTime()
-     * @see #pairParticipantsNew(int, int)
+     * @see #pairParticipants(int, int)
      * @see #initializeCustomList()
      * @see Game#startGameFirstTime(Player[], int, int, int)
      * @see Game#startGame(Player[], int, int, int, int)
      */
-    public void startTournamentGameVersion3(int multiplier,int playerIndex){
+    public void startTournament(int multiplier, int playerIndex){
         boolean isTournamentEnd = false;
         pairParticipantsFirstTime();
         /*for (int i = 0; i < participants.length; i++) {
@@ -191,7 +191,7 @@ public class Tournament {
         initializeCustomList();
         //startList.printList();
         while(!isTournamentEnd){
-            pairParticipantsNew(multiplier,playerIndex);
+            pairParticipants(multiplier,playerIndex);
             if(globalCounter == participants.length){
                 isTournamentEnd = true;
             }
@@ -201,7 +201,7 @@ public class Tournament {
     /**
      * Initialisiert {@link #startList} und {@link #endList} mithilfe von {@link #participantsSortedWithTime}.
      * <p>
-     * Wird innerhalb von {@link #startTournamentGameVersion3(int, int)} aufgerufen, nachdem die Paare, die am Anfang gebildet wurde, alle gespielt haben.
+     * Wird innerhalb von {@link #startTournament(int, int)} aufgerufen, nachdem die Paare, die am Anfang gebildet wurde, alle gespielt haben.
      * {@link #indexIdentifier} wird auch initialisiert, und zwar mit dem ersten Element der Liste.
      * @see #pairParticipantsFirstTime()
      * @see Game#startGameFirstTime(Player[], int, int, int)
@@ -421,11 +421,11 @@ public class Tournament {
      * @see Player#getIsInGame()
      * @see #getUpperIndex(int[], Player)
      * @see #getLowerIndex(int[], Player)
-     * @see #multipleTimePairingNew(Player)
+     * @see #pairTwoPlayers(Player)
      * @see #sortInCustomListOne(Player, CustomList)
      * @see #sortInCustomListOneOpponent(Player) (Player, CustomList)
      */
-    public void pairParticipantsNew(int multiplier, int playerIndex) {
+    public void pairParticipants(int multiplier, int playerIndex) {
 
         int index;
 
@@ -451,7 +451,7 @@ public class Tournament {
         //System.out.println("Niedrigere Grenze: " + lowerBoundIndex);
         //System.out.println("Höhere Grenze: " + upperBoundIndex);
 
-        multipleTimePairingNew(player);
+        pairTwoPlayers(player);
 
 
         if(!player.getIsInGame()){
@@ -529,7 +529,7 @@ public class Tournament {
      * @see CustomList#getPointer()
      * @see CustomList#getData()
      * @see CustomList#getCustomListWithPlayerIndex(int)
-     * @see #pairParticipantsNew(int, int)
+     * @see #pairParticipants(int, int)
      * @see CustomList
      */
     public void sortInCustomListOne(Player player, CustomList start){
@@ -569,7 +569,7 @@ public class Tournament {
      * Einzige Unterschied ist, dass hier nicht mehr auf aktuellsten gegner bei der Sortierung beachtet wird,
      * weil diese schon Einsortiert wurde. Da diese schon einsortiert wurde, sollte man diese nicht überspringen.
      * @param player    Spieler deren Gegner einzusortieren ist
-     * @see #pairParticipantsNew(int, int)
+     * @see #pairParticipants(int, int)
      */
     public void sortInCustomListOneOpponent(Player player){
         CustomList tmpStart = startList.getCustomListWithPlayerIndex(player.getOpponentIndex());
@@ -602,7 +602,7 @@ public class Tournament {
     /**
      * Sucht einen Gegner für einen Spieler, abhängig von dem {@link Player#getRating()} und {@link Player#getTimePlayed()} sind, wenn diese möglich ist.
      * <p>
-     * Diese Funktion wird von {@link #pairParticipantsNew(int, int)} aufgerufen, um einen Spieler
+     * Diese Funktion wird von {@link #pairParticipants(int, int)} aufgerufen, um einen Spieler
      * ein Gegner zu finden. Die Gegner suchende Spieler ist meistens der Spieler mit der niedrigsten Spielzeit.
      * Es gibt Ausnahmefälle, indem nicht der Spieler mit der niedrigsten Spielzeit ein Gegner sucht, sondern der Spieler mit der nächstniedrigere
      * Spielzeit oder die drittniedrigsten Spieler usw., falls der davorliegenden Spieler keine Gegner gefunden haben.
@@ -628,7 +628,7 @@ public class Tournament {
      * @see #startList
      * @see #participants
      */
-    public void multipleTimePairingNew(Player player){
+    public void pairTwoPlayers(Player player){
         int timeDiff = 100_001;
         int minTimeDiff = 100_000;
         int minTime = 0;
@@ -768,7 +768,7 @@ public class Tournament {
     /**
      * Setzt {@link Player#getOpponentIndex()} für jede Teilnehmer, dessen Spielzeit noch kleiner als das Turnierdauer ist, auf -1.
      * <p>
-     * Diese Funktion wird von {@link #pairParticipantsNew(int, int)} bei der Ausnahmefall aufgerufen, wenn zum Beispiel nur noch zwei Spieler gibt, die davor schon gegeneinander gespielt haben,
+     * Diese Funktion wird von {@link #pairParticipants(int, int)} bei der Ausnahmefall aufgerufen, wenn zum Beispiel nur noch zwei Spieler gibt, die davor schon gegeneinander gespielt haben,
      * aber die Spielzeit von beide Spieler ist noch kleiner als das Turnierdauer.
      */
     public void setOpponentIndexForEveryPlayer(){

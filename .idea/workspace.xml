@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8851b235-7b2e-481f-a4fc-9feea3577949" name="Changes" comment="changed workspace">
+    <list default="true" id="8851b235-7b2e-481f-a4fc-9feea3577949" name="Changes" comment="Changed function name to startGame and to startGameFirstTime">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CustomList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament.java" afterDir="false" />
     </list>
@@ -123,7 +125,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741261180094</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Changed function name to startGame and to startGameFirstTime">
+      <option name="closed" value="true" />
+      <created>1741261562030</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1741261562031</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -146,6 +156,7 @@
     <MESSAGE value="multiTimePairing wurde für die Fall von ändernden Ratings von Turnierteilnehmer angepasst, wodurch sich zwei funktionsparameter entfernt wurde. Deshalb musste auch die Dokumentation verändert werden überall wo diese Funktion vorkam." />
     <MESSAGE value="Dokumentation für adjustRating und helpMethodForAdjustRating geschrieben" />
     <MESSAGE value="changed workspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed workspace" />
+    <MESSAGE value="Changed function name to startGame and to startGameFirstTime" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed function name to startGame and to startGameFirstTime" />
   </component>
 </project>

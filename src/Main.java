@@ -1,9 +1,5 @@
-import org.apache.commons.math3.distribution.NormalDistribution;
-
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Hashtable;
-import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -80,7 +76,7 @@ public class Main {
             int threadIndex = i;
             threads[i] = new Thread(()->{
                     for(int z = 0; z < 10000; z++){
-                        tournaments[threadIndex].startTournamentGameVersion3(threadIndex-8,playerIndex);
+                        tournaments[threadIndex].startTournament(threadIndex-8,playerIndex);
                         /*for(int k = 0; k < participantsSize; k++){
                             gamesLeftArray[tournaments[threadIndex].getParticipants()[k].getIndex()] += tournaments[threadIndex].getParticipants()[k].getGamesLeft();
                         }*/
