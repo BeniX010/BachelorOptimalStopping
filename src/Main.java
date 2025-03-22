@@ -4,15 +4,15 @@ import java.util.Comparator;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-        int participantsSize = 10;
+        int participantsSize = 50;
         int[] resultArray = new int[participantsSize];
         int[][] participantsPairing;
         Tournament[] tournaments = new Tournament[17];
         Thread[] threads = new Thread[17];
         boolean isTournamentEnd = false;
-        Tournament tournament = new Tournament(1200,participantsSize,300,60);
+        Tournament tournament = new Tournament(3600,participantsSize,300,60);
         Player myPlayer = new Player("MyPlayer",1200);
-        tournament.fillAndSortParticipantNormalDistribution(1500,150,myPlayer);
+        //tournament.fillAndSortParticipantNormalDistribution(1500,150,myPlayer);
         /*fillTest(tournament);
         tournament.initializeCustomList();
         tournament.pairParticipantsNew(0,0);
@@ -23,9 +23,10 @@ public class Main {
         //fillParticipantsWithPredefinedValues(tournament);
         long startTime = System.currentTimeMillis();
         long endTime;
-        tournament.printParticipants();
+        /*tournament.printParticipants();
         tournament.startTournament(1,0);
-        /*for(int i = 0; i < tournaments.length; i++){
+        tournament.printTable(1,new int[10]);*/
+        for(int i = 0; i < tournaments.length; i++){
             tournaments[i] = new Tournament(3600,participantsSize,300,60);
         }
         for(int i = 0; i < tournaments.length; i++){
@@ -35,7 +36,7 @@ public class Main {
         double[] averagePoints = new double[17];
         double maxPoints = 0.0;
         int multiplierIndex = 0;
-        int playerIndex = 10;
+        int playerIndex = 41;
 
         for(int i = 0; i < threads.length; i++){
             int threadIndex = i;
@@ -45,11 +46,11 @@ public class Main {
 
                     //System.out.println(threadIndex);
                     for(int z = 0; z < 10000; z++){
-                        tournaments[threadIndex].startTournamentGameVersion3(threadIndex,playerIndex);
+                        tournaments[threadIndex].startTournament(threadIndex-4,playerIndex);
                         /*for(int k = 0; k < participantsSize; k++){
                             gamesLeftArray[tournaments[threadIndex].getParticipants()[k].getIndex()] += tournaments[threadIndex].getParticipants()[k].getGamesLeft();
                         }*/
-                       /*tournaments[threadIndex].resetTournament();
+                       tournaments[threadIndex].resetTournament();
                     }
                     averagePoints[threadIndex] = tournaments[threadIndex].getParticipants()[playerIndex].getPoints() / 10_000.0;
                     /*for(int k = 0; k < participantsSize; k++){
@@ -57,7 +58,7 @@ public class Main {
                     }*/
                     //printTable(participantsResult,10000.0,gamesLeftArray);
                     //System.out.println();
-/*
+
             });
         }
 
@@ -69,9 +70,10 @@ public class Main {
         }
 
         for(int z = 0; z < averagePoints.length; z++){
+            System.out.println(averagePoints[z]);
             if(averagePoints[z] > maxPoints){
                 maxPoints = averagePoints[z];
-                multiplierIndex = z;
+                multiplierIndex = z-4;
             }
         }
         if(multiplierIndex >= 0){
@@ -79,7 +81,7 @@ public class Main {
         }else{
             System.out.println("Maximale Punktanzahl: " + maxPoints + " mit einen Range von: " + multiplierIndex * 25);
         }
-        */
+
         endTime = System.currentTimeMillis();
         System.out.println("Runtime in seconds: " + (endTime-startTime));
 
@@ -148,7 +150,7 @@ public class Main {
     }
 
     public static void printTable(Player[] participantsResult, double mean, int[] gamesLeft){
-        Arrays.sort(participantsResult,Comparator.comparingInt(Player::getPoints).reversed());
+        Arrays.sort(participantsResult,Comparator.comparingDouble(Player::getPoints).reversed());
         for(int i = 0; i < participantsResult.length; i++){
             System.out.print(participantsResult[i].getId() + " Points: " + participantsResult[i].getPoints()/mean);
             System.out.print(" Games Left: " + gamesLeft[participantsResult[i].getIndex()]);
