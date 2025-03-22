@@ -254,13 +254,14 @@ public class Tournament {
         //Suchende Spieler
         Player player = null;
 
+
         for(int i = 0; i < participants.length; i++){
             index = i;
             if(participants[index].getIsInGame()){
                // System.out.println(index);
                 continue;
             }
-
+            //System.out.println(index);
             participants[i].setIsInGame(true);
 
             player = participants[index];
@@ -432,7 +433,7 @@ public class Tournament {
         participants[index].setIsInGame(true);
 
         player = participants[index];
-        System.out.println(index);
+        //System.out.println(index);
 
         //legt die obere grenzindex fest für die Spieler die myPlayer als stärkste gegner bekommen könnte
         upperBoundIndex = getUpperIndex(participantsRating, player);
@@ -471,7 +472,7 @@ public class Tournament {
         sortInCustomListOneOpponent(player);
 
         indexIdentifier = startList.getPointer();
-        startList.printList();
+        //startList.printList();
 
     }
 
@@ -664,8 +665,8 @@ public class Tournament {
             player.setIsInGame(false);
             return;
         }
-        System.out.println("Time from Player Before: " + player.getTimePlayed());
-        System.out.println("Time from Opponent Before: " + participants[opponentIndex].getTimePlayed());
+        //System.out.println("Time from Player Before: " + player.getTimePlayed());
+        //System.out.println("Time from Opponent Before: " + participants[opponentIndex].getTimePlayed());
         //System.out.println("TIMEDIFF:"+timeDiff);
         if(sameTimeDiffList.size() > 1){
             Random random = new Random();
@@ -677,9 +678,9 @@ public class Tournament {
             participants[opponentIndex].addTimePlayed(player.getTimePlayed()
                     - participants[opponentIndex].getTimePlayed());
         }
-        System.out.println("Time from Player After: " + player.getTimePlayed());
+        /*System.out.println("Time from Player After: " + player.getTimePlayed());
         System.out.println("Time from Opponent After: " + participants[opponentIndex].getTimePlayed());
-        System.out.println("OPPONENTINDEX: " + opponentIndex);
+        System.out.println("OPPONENTINDEX: " + opponentIndex);*/
         participants[opponentIndex].setIsInGame(true);
         player.setOpponentIndex(opponentIndex);
         participants[opponentIndex].setOpponentIndex(player.getIndex());
@@ -735,7 +736,7 @@ public class Tournament {
      */
     public void printTable(double tournamentPlayed, int[] gamesLeftArray){
         setPlayerGamesLeft(gamesLeftArray);
-        Arrays.sort(participants,Comparator.comparingInt(Player::getPoints).reversed());
+        Arrays.sort(participants,Comparator.comparingDouble(Player::getPoints).reversed());
         for(int i = 0; i < participants.length; i++){
             System.out.print(participants[i].getId() + " Points: " + participants[i].getPoints()/tournamentPlayed);
             System.out.print(" Games Left: " + participants[i].getGamesLeft());

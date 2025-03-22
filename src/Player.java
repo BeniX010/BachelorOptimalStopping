@@ -20,7 +20,7 @@ public class Player {
     /**
      * Points sind die punkte einen Spieler die in das Turnier erzielt wurde.
      */
-    private int points;
+    private double points;
     /**
      * Gibt an, wie viele Spiele der Spieler verlassen hat.
      * Dies wird während der Turniere aktualisiert und wird dadurch eine entsprechende
@@ -124,7 +124,7 @@ public class Player {
      * @param point Anzahl der Punkte die zu der Punkteanzahl dazuaddiert werden soll
      * @see #points
      */
-    public void addPoints(int point){
+    public void addPoints(double point){
         this.points += point;
     }
 
@@ -155,7 +155,7 @@ public class Player {
         return this.rating;
     }
 
-    public int getPoints(){
+    public double getPoints(){
         return this.points;
     }
 
