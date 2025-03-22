@@ -101,10 +101,10 @@ public class Game {
     * @see Player#addTimePlayed(int)
     * @see Player#addGamesPlayed(int)
     * @see Player#setIsInGame(boolean)
-    * @see Player#addPoints(int)
+    * @see Player#addPoints(double)
     * @see Random#nextGaussian(double, double)
     * @see Random#nextDouble()
-    * @see #playerLeftGame(Player, Player)
+    * @see #playerLeftGame(Player, Player, int, double, double)
     * @see #calculateWinProbability(int)
     * @see #calculateDrawProbability(int)
     * @see Math#round(double)
@@ -120,13 +120,16 @@ public class Game {
 
         player1 = participants[index];
         player2 = participants[player1.getOpponentIndex()];
+        int ratingDiff = player1.getRating()-player2.getRating();
+        winProbability = calculateWinProbability(ratingDiff);
+        drawProbability = calculateDrawProbability(ratingDiff);
         //System.out.println("Player: " + player1.getIndex() + " Opponent: " + player1.getOpponentIndex());
 
         if(player1.getIndex() == playerIndex && player1.getRating()+multiplier*25 < player2.getRating()){
-            playerLeftGame(player1,player2);
+            playerLeftGame(player1,player2,ratingDiff,1-(winProbability+drawProbability),drawProbability);
         }
         else if(player2.getIndex() == playerIndex && player2.getRating()+multiplier*25 < player1.getRating()){
-            playerLeftGame(player2,player1);
+            playerLeftGame(player2,player1,ratingDiff,winProbability,drawProbability);
         }
         else{
             roundTime = (int)Math.round(random.nextGaussian(roundTimeMean,roundTimeSd));
@@ -143,23 +146,38 @@ public class Game {
             }
 
             randomValue = random.nextDouble();
-            winProbability = calculateWinProbability(player1.getRating()-player2.getRating());
-            drawProbability = calculateDrawProbability(player1.getRating()-player2.getRating());
                /* System.out.println("RANDOM_ " +randomValue);
                 System.out.println("WINPROBABILITY: " + winProbability);
                 System.out.println("DRAWPROBABILITY: " + drawProbability);*/
             if(randomValue <= winProbability){
-                player1.addPoints(2);
+                if(ratingDiff == 0){
+                    player1.addPoints(2);
+                }else{
+                    adjustPointsWin(player1,winProbability,drawProbability);
+                    adjustPointsLose(player2,1-(winProbability+drawProbability),drawProbability);
+                }
                 //System.out.println(player1.getId() + " won!");
                 // System.out.println("Won!");
             }
             else if(randomValue <= winProbability+drawProbability){
-                player1.addPoints(1);
-                player2.addPoints(1);
+                if(ratingDiff == 0){
+                    player1.addPoints(1);
+                    player2.addPoints(1);
+                }else {
+                    adjustPointsDraw(player1, winProbability,drawProbability);
+                    adjustPointsDraw(player2, 1-(winProbability+drawProbability), drawProbability);
+                }
+
                 //System.out.println(player1.getId() + " Draw!");
             }
             else{
-                player2.addPoints(2);
+                if(ratingDiff == 0){
+                    player2.addPoints(2);
+                }else{
+                    adjustPointsWin(player2,1-(winProbability+drawProbability),drawProbability);
+                    adjustPointsLose(player1,winProbability,drawProbability);
+                }
+
                 //System.out.println(player1.getId() + " lost!");
             }
             player1.addGamesPlayed(1);
@@ -183,11 +201,13 @@ public class Game {
      * @see Player#addGamesLeft()
      * @see Player#addGamesPlayed(int)
      * @see Player#addTimePlayed(int)
-     * @see Player#addPoints(int)
+     * @see Player#addPoints(double)
      * @see Player#setIsInGame(boolean)
      */
-    private void playerLeftGame(Player player1, Player player2){
+    private void playerLeftGame(Player player1, Player player2, int ratingDiff, double winProb, double drawProb){
         //System.out.println(player1.getId()+" Left");
+        //System.out.println("winProb: " + winProb);
+        //System.out.println("drawProb: " + drawProb);
         player1.addGamesLeft();
         player1.addGamesPlayed(1);
         if(player1.getGamesLeft() > 3){
@@ -196,7 +216,12 @@ public class Game {
         player1.addTimePlayed(10);
         player2.addTimePlayed(10);
         player2.addGamesPlayed(1);
-        player2.addPoints(2);
+        if(ratingDiff == 0){
+            player2.addPoints(2);
+        }else{
+            adjustPointsWin(player2,winProb,drawProb);
+            adjustPointsLose(player1,1-(winProb+drawProb),drawProb);
+        }
         player1.setIsInGame(false);
         player2.setIsInGame(false);
     }
@@ -229,6 +254,35 @@ public class Game {
      */
     private double calculateDrawProbability(int ratingDifference){
         return 2*Math.sqrt(calculateWinProbability(ratingDifference)*calculateWinProbability(-ratingDifference));
+    }
+
+    private void adjustPointsWin(Player player, double winProb, double drawProb){
+        if(winProb < 0.25){
+            double winProbNew = 1-(drawProb+winProb);
+            player.addPoints((winProbNew-0.25)*2+2);
+            //System.out.println("WON : " + ((winProbNew-0.25)*2+2));
+        }else{
+            player.addPoints(2-(winProb-0.25)*2);
+            //System.out.println("WON : " + (2-(winProb-0.25)*2));
+        }
+    }
+
+    private void adjustPointsDraw(Player player, double winProb, double drawProb){
+        if(winProb < 0.25){
+            double winProbNew = 1-(drawProb+winProb);
+            player.addPoints((winProbNew-0.25)*1+1);
+            //System.out.println("DRAW : " + ((winProbNew-0.25)*1+1));
+        }else{
+            player.addPoints(1-(winProb-0.25)*1);
+            //System.out.println("DRAW : " + (1-(winProb-0.25)*1));
+        }
+    }
+
+    private void adjustPointsLose(Player player, double winProb, double drawProb){
+        if(winProb > 0.25){
+            player.addPoints(-1*((winProb-0.25)*2));
+            //System.out.println("LOST : " + (-1*((winProb-0.25)*2)));
+        }
     }
 
     //Getters und Setters
